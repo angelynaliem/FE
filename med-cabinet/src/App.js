@@ -1,19 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import './App.css';
-import PrivateRoute from './utils/PrivateRoute';
+// import PrivateRoute from './utils/PrivateRoute';
+// import Login from './Components/Login';
+import Registration from './Components/Registration';
 
-function App () {
-  
+const App = () => {
   return (
     <Router>
-    <div className="App">
-      <Switch>
-      <Route exact path="/login" component={Login} />
-     <PrivateRoute path="/protected" component={StrainList}/>
-     </Switch>
-    </div>
+      <div className='App'>
+        <Switch>
+          <Route exact path='/Registration' component={Registration} />
+          {/* <PrivateRoute path='/protected' component={StrainList} /> */}
+        </Switch>
+      </div>
     </Router>
   );
-}
-
+};
 export default App;
