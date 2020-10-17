@@ -23,8 +23,7 @@ const formSchema = yup.object().shape({
   insomnia: yup.string().defined(),
   lackofappetite: yup.string().defined(),
   pain: yup.string().defined(),
-  seizures: yup.string().defined(),
-  stress: yup.string().defined(),
+  nausea: yup.string().defined(),
 });
 
 export default function Registration() {
@@ -33,6 +32,12 @@ export default function Registration() {
     email: '',
     password: '',
     type: '',
+    depression: '',
+    inflammation: '',
+    insomnia: '',
+    lackofappetite: '',
+    pain: '',
+    nausea: '',
     creative: '',
     energetic: '',
     euphoric: '',
@@ -40,13 +45,6 @@ export default function Registration() {
     happy: '',
     hungry: '',
     relaxed: '',
-    depression: '',
-    inflammation: '',
-    insomnia: '',
-    lackofappetite: '',
-    pain: '',
-    seizures: '',
-    stress: '',
   });
 
   const [post, setPost] = useState('');
@@ -58,6 +56,12 @@ export default function Registration() {
     email: '',
     password: '',
     type: '',
+    depression: '',
+    inflammation: '',
+    insomnia: '',
+    lackofappetite: '',
+    pain: '',
+    nausea: '',
     creative: '',
     energetic: '',
     euphoric: '',
@@ -65,17 +69,10 @@ export default function Registration() {
     happy: '',
     hungry: '',
     relaxed: '',
-    depression: '',
-    inflammation: '',
-    insomnia: '',
-    lackofappetite: '',
-    pain: '',
-    seizures: '',
-    stress: '',
   });
 
   const handleChanges = (event) => {
-    event.persist(); // this is necessary to maintain the event object so that we can pass it to our validation function
+    event.persist();
 
     const newFormData = {
       ...formState,
@@ -83,7 +80,6 @@ export default function Registration() {
     };
 
     validateChange(event);
-
     setFormState(newFormData);
   };
 
@@ -128,6 +124,12 @@ export default function Registration() {
           email: '',
           password: '',
           type: '',
+          depression: '',
+          inflammation: '',
+          insomnia: '',
+          lackofappetite: '',
+          pain: '',
+          nausea: '',
           creative: '',
           energetic: '',
           euphoric: '',
@@ -135,13 +137,6 @@ export default function Registration() {
           happy: '',
           hungry: '',
           relaxed: '',
-          depression: '',
-          inflammation: '',
-          insomnia: '',
-          lackofappetite: '',
-          pain: '',
-          seizures: '',
-          stress: '',
         });
         serverError(null);
       })
@@ -164,6 +159,7 @@ export default function Registration() {
           value={formState.name}
           onChange={handleChanges}
         />
+        {errors.name.length > 2 ? <p className='error'>{errors.name}</p> : null}
       </label>
       <br />
       <label htmlFor='email'>
@@ -177,6 +173,9 @@ export default function Registration() {
           value={formState.email}
           onChange={handleChanges}
         />
+        {errors.email.length > 2 ? (
+          <p className='error'>{errors.email}</p>
+        ) : null}
       </label>
       <br />
       <label htmlFor='password'>
@@ -190,6 +189,9 @@ export default function Registration() {
           value={formState.password}
           onChange={handleChanges}
         />
+        {errors.password.length > 2 ? (
+          <p className='error'>{errors.password}</p>
+        ) : null}
       </label>
       <br />
 
@@ -217,6 +219,83 @@ export default function Registration() {
           </option>
         </select>
       </label>
+
+      <div className=''>
+        <h2>Conditions to be treated</h2>
+
+        <label htmlFor='depression' className='effectsChkBox'>
+          <input
+            type='checkbox'
+            name='depression'
+            data-cy='depression'
+            id='depressionSelect'
+            checked={formState.depression}
+            onChange={handleChanges}
+          />
+          Depression
+        </label>
+
+        <label htmlFor='inflammation' className='effectsChkBox'>
+          <input
+            type='checkbox'
+            name='inflammation'
+            data-cy='inflammation'
+            id='inflammationSelect'
+            checked={formState.inflammation}
+            onChange={handleChanges}
+          />
+          Inflammation
+        </label>
+
+        <label htmlFor='insomnia' className='effectsChkBox'>
+          <input
+            type='checkbox'
+            name='insomnia'
+            data-cy='insomnia'
+            id='insomniaSelect'
+            checked={formState.insomnia}
+            onChange={handleChanges}
+          />
+          Insomnia
+        </label>
+
+        <label htmlFor='lackofappetite' className='effectsChkBox'>
+          <input
+            type='checkbox'
+            name='lackofappetite'
+            data-cy='lackofappetite'
+            id='lackofappetiteSelect'
+            checked={formState.lackofappetite}
+            onChange={handleChanges}
+          />
+          Lack of appetite
+        </label>
+
+        <label htmlFor='pain' className='effectsChkBox'>
+          <input
+            type='checkbox'
+            name='pain'
+            data-cy='pain'
+            id='painSelect'
+            checked={formState.pain}
+            onChange={handleChanges}
+          />
+          Pain
+        </label>
+
+        <label htmlFor='nausea' className='effectsChkBox'>
+          <input
+            type='checkbox'
+            name='nausea'
+            data-cy='nausea'
+            id='nauseaSelect'
+            checked={formState.nausea}
+            onChange={handleChanges}
+          />
+          Nausea
+        </label>
+      </div>
+
       <div>
         {/* <div className='toppingChecklist'> */}
         <h2>Choose desired effect(s)</h2>
@@ -303,94 +382,6 @@ export default function Registration() {
             onChange={handleChanges}
           />
           Relaxed
-        </label>
-      </div>
-
-      <div className=''>
-        <h2>Conditions to be treated</h2>
-
-        <label htmlFor='depression' className='effectsChkBox'>
-          <input
-            type='checkbox'
-            name='depression'
-            data-cy='depression'
-            id='depressionSelect'
-            checked={formState.depression}
-            onChange={handleChanges}
-          />
-          Depression
-        </label>
-
-        <label htmlFor='inflammation' className='effectsChkBox'>
-          <input
-            type='checkbox'
-            name='inflammation'
-            data-cy='inflammation'
-            id='inflammationSelect'
-            checked={formState.inflammation}
-            onChange={handleChanges}
-          />
-          Inflammation
-        </label>
-
-        <label htmlFor='insomnia' className='effectsChkBox'>
-          <input
-            type='checkbox'
-            name='insomnia'
-            data-cy='insomnia'
-            id='insomniaSelect'
-            checked={formState.insomnia}
-            onChange={handleChanges}
-          />
-          Insomnia
-        </label>
-
-        <label htmlFor='lackofappetite' className='effectsChkBox'>
-          <input
-            type='checkbox'
-            name='lackofappetite'
-            data-cy='lackofappetite'
-            id='lackofappetiteSelect'
-            checked={formState.lackofappetite}
-            onChange={handleChanges}
-          />
-          Lack of appetite
-        </label>
-
-        <label htmlFor='pain' className='effectsChkBox'>
-          <input
-            type='checkbox'
-            name='pain'
-            data-cy='pain'
-            id='painSelect'
-            checked={formState.pain}
-            onChange={handleChanges}
-          />
-          Pain
-        </label>
-
-        <label htmlFor='seizures' className='effectsChkBox'>
-          <input
-            type='checkbox'
-            name='seizures'
-            data-cy='seizures'
-            id='seizuresSelect'
-            checked={formState.seizures}
-            onChange={handleChanges}
-          />
-          Seizures
-        </label>
-
-        <label htmlFor='stress' className='effectsChkBox'>
-          <input
-            type='checkbox'
-            name='stress'
-            data-cy='stress'
-            id='stressSelect'
-            checked={formState.stress}
-            onChange={handleChanges}
-          />
-          Stress
         </label>
       </div>
 
