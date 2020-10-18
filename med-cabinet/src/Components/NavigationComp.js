@@ -22,7 +22,6 @@ const NavigationComp = () => {
       <NewDiv>
         <NewNavLink to='/Registration'>Registration</NewNavLink>
         <NewNavLink to='/StrainList'>Strains List</NewNavLink>
-        <NewNavLink to='/IndividualStrainPage'>Indivdual Strain</NewNavLink>
       </NewDiv>
       <Route exact path='/Registration' component={Registration} />
       <Route exact path='/StrainList' component={StrainList} />
