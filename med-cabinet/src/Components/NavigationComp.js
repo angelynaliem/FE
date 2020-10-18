@@ -24,12 +24,7 @@ const NavigationComp = () => {
       <NewDiv>
       <NewNavLink to='/Login'>Login</NewNavLink>
         <NewNavLink to='/Registration'>Registration</NewNavLink>
-<<<<<<< HEAD
         <NewNavLink to='/protected'>Strains List</NewNavLink>
-        <NewNavLink to='/IndividualStrainPage'>Indivdual Strain</NewNavLink>
-=======
-        <NewNavLink to='/StrainList'>Strains List</NewNavLink>
->>>>>>> 6bd8a1b3b93312931c38258874be9ea04aa1c07d
       </NewDiv>
       <Route exact path='/Registration' component={Registration} />
       <Route exact path='/Login' component={Login} />
