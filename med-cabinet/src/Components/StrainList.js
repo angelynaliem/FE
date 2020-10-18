@@ -14,7 +14,7 @@ const StrainWrapperDiv = styled.div`
   flex-wrap: wrap;
 `;
 
-const StrainDetails = () => {
+const StrainList = () => {
   const [dataStrain, setDataStrain] = useState(Data);
 
   return (
@@ -36,4 +36,4 @@ const StrainDetails = () => {
   );
 };
 
-export default StrainDetails;
+export default StrainList;
