@@ -1,8 +1,9 @@
 import React from 'react';
-import { NavLink, Route } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import Registration from './Registration';
 import StrainList from './StrainList';
+import PrivateRoute from '../utils/PrivateRoute'
 import Login from './Login';
 
 const NewDiv = styled.div`
@@ -12,7 +13,7 @@ const NewDiv = styled.div`
   align-items: center;
 `;
 
-const NewNavLink = styled(NavLink)`
+const NewNavLink = styled(Link)`
   color: Black;
   font-size: 2rem;
 `;
@@ -21,14 +22,14 @@ const NavigationComp = () => {
   return (
     <div>
       <NewDiv>
-      <NewNavLink to='/Login'>Login</NewNavLink>
-        <NewNavLink to='/Registration'>Registration</NewNavLink>
-        <NewNavLink to='/StrainList'>Strains List</NewNavLink>
-        <NewNavLink to='/IndividualStrainPage'>Indivdual Strain</NewNavLink>
+      <Link to='/Login'>Login</Link>
+        <Link to='/Registration'>Registration</Link>
+        <Link to='/protected'>Strains List</Link>
+        <Link to='/IndividualStrainPage'>Indivdual Strain</Link>
       </NewDiv>
       <Route exact path='/Registration' component={Registration} />
       <Route exact path='/Login' component={Login} />
-      <Route exact path='/StrainList' component={StrainList} />
+      <PrivateRoute path='/protected' component={StrainList} />
     </div>
   );
 };

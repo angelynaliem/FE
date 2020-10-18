@@ -15,7 +15,6 @@ const App = () => {
           <Route path='/'>
             <NavigationComp />
           </Route>
-          <PrivateRoute path='/protected' component={StrainList} />
         </Switch>
       </div>
     </Router>
