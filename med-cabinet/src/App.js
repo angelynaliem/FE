@@ -7,7 +7,6 @@ import NavigationComp from './Components/NavigationComp';
 import StrainList from './Components/StrainList';
 
 const App = () => {
- 
   return (
     <Router>
       <div className='App'>
