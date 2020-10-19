@@ -14,7 +14,7 @@ class Login extends React.Component {
   };
 
   redirectToRegister = () => {
-    this.props.history.push('/Register');
+    this.props.history.push('/Registration');
   };
 
   handleChange = (e) => {

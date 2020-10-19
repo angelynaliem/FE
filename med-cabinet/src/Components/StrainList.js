@@ -3,6 +3,12 @@ import Data from '../Data/csvjson.json';
 import styled from 'styled-components';
 import SearchForm from '../Froms/SearchForm';
 
+import {getData} from '../actions/actions';
+import { useEffect } from 'react';
+
+import {connect} from 'react-redux';
+
+
 const NewDiv = styled.div`
   width: 30%;
   border: 1px solid black;
@@ -14,7 +20,10 @@ const StrainWrapperDiv = styled.div`
   flex-wrap: wrap;
 `;
 
-const StrainList = () => {
+const StrainList = (props) => {
+  useEffect(()=>{
+    props.getData();
+  },[]);
   const [dataStrain, setDataStrain] = useState(Data);
 
   return (
@@ -37,4 +46,15 @@ const StrainList = () => {
   );
 };
 
-export default StrainList;
+const mapStateToProps = (state)=>{
+  return{
+    strains: state.strains,
+    isFetching: state.isFetching,
+    isUploading: state.isUploading,
+    error: state.error,
+  };
+};
+
+export default connect(mapStateToProps,{
+  getData,
+}) (StrainList);

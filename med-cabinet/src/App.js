@@ -6,10 +6,12 @@ import NavigationComp from './Components/NavigationComp';
 // import Login from './Components/Login';
 import StrainList from './Components/StrainList';
 
+
 const App = () => {
   return (
-    <Router>
-      <div className='App'>
+    
+    <Router >
+      <div className="App">
         <Switch>
           <Route path='/'>
             <NavigationComp />
@@ -17,6 +19,10 @@ const App = () => {
         </Switch>
       </div>
     </Router>
+    
+    
+    
+    
   );
 };
 export default App;
