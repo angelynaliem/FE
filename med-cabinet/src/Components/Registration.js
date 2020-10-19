@@ -9,7 +9,7 @@ const formSchema = yup.object().shape({
   password: yup.string().required('Password is a required field'),
   type: yup
     .string()
-    .required('Please select strain type')
+    // .required('Please select strain type')
     .oneOf(['indica', 'sativa', 'hybrid']),
   creative: yup.string().defined(),
   energetic: yup.string().defined(),

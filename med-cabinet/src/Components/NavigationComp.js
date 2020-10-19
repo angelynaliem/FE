@@ -3,7 +3,7 @@ import { Link, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import Registration from './Registration';
 import StrainList from './StrainList';
-import PrivateRoute from '../utils/PrivateRoute'
+import PrivateRoute from '../utils/PrivateRoute';
 import Login from './Login';
 
 const NewDiv = styled.div`
@@ -22,7 +22,7 @@ const NavigationComp = () => {
   return (
     <div>
       <NewDiv>
-      <NewNavLink to='/Login'>Login</NewNavLink>
+        <NewNavLink to='/Login'>Login</NewNavLink>
         <NewNavLink to='/Registration'>Registration</NewNavLink>
         <NewNavLink to='/protected'>Strains List</NewNavLink>
       </NewDiv>
