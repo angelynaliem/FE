@@ -9,6 +9,14 @@ class Login extends React.Component {
     }
   };
 
+  componentDidMount() {
+    localStorage.clear();
+  };
+
+  redirectToRegister = () => {
+    this.props.history.push('/Register');
+  };
+
   handleChange = (e) => {
     this.setState({
       credentials: {
@@ -42,6 +50,7 @@ class Login extends React.Component {
     return (
       
       <div>
+        <h1>Best Buds</h1>
         <h2>Log In</h2>
      
         <form onSubmit={this.login}>
@@ -68,6 +77,10 @@ class Login extends React.Component {
           </label>
           <button data-testid= "submit">Log in</button>
         </form>
+        <div>
+          <p>Don't Have an Account?</p>
+          <button onClick={() => this.redirectToRegister()}>Register Here</button>
+        </div>
       </div>
     );
   }
