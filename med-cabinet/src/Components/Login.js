@@ -1,5 +1,11 @@
 import React from "react";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
+import styled from 'styled-components';
+
+const FormDiv = styled.div `
+  color: white;
+
+`
 
 class Login extends React.Component {
   state = {
@@ -49,7 +55,7 @@ class Login extends React.Component {
   render() {
     return (
       
-      <div>
+      <FormDiv>
         <h1>Best Buds</h1>
         <h2>Log In</h2>
      
@@ -81,7 +87,7 @@ class Login extends React.Component {
           <p>Don't Have an Account?</p>
           <button onClick={() => this.redirectToRegister()}>Register Here</button>
         </div>
-      </div>
+      </FormDiv>
     );
   }
 }
