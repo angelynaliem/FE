@@ -1,25 +1,3 @@
-// import React from 'react';
-// import { Link, Route } from 'react-router-dom';
-// import styled from 'styled-components';
-
-
-// const NewNavLink = styled(Link)`
-//   color: white;
-//   font-size: 2rem;
-// `;
-
-// const Dashboard = () => {
-//     return ( 
-//         <div>
-//             <h1>Dashboard Template</h1>
-//             <NewNavLink to='/Strainlists' >Strain List</NewNavLink>
-//             </div>
-//      );
-// }
- 
-// export default Dashboard;
-
-
 import React, { useState, useEffect } from 'react';
 import * as yup from 'yup';
 import axios from 'axios';
@@ -63,15 +41,11 @@ export default function Registration() {
     relaxed: '',
   });
 
-  const [post, setPost] = useState('');
   const [serverError, setServerError] = useState('');
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
   const [errors, setErrors] = useState({
-    name: '',
-    email: '',
-    password: '',
-    type: '',
+   type:'',
     depression: '',
     inflammation: '',
     insomnia: '',
@@ -133,12 +107,9 @@ export default function Registration() {
       .post('https://reqres.in/api/users', formState)
       .then((response) => {
         console.log(response);
-        setPost(response.data);
-        console.log('Success', post);
+        
         setFormState({
-          name: '',
-          email: '',
-          password: '',
+          
           type: '',
           depression: '',
           inflammation: '',
@@ -363,7 +334,6 @@ export default function Registration() {
       >
         Submit
       </button>
-      <pre>{JSON.stringify(post, null, 2)}</pre>
     </form>
   );
 }
