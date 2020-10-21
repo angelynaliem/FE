@@ -30,14 +30,20 @@ const H1 = styled.div `
   margin-top: 60px;
 
 `;
+const IMG = styled.img `
+width: 100%;
+height: 250px;
+opacity: .8;
 
+`
 
 const App = () => {
   return (
     
     <Router >
       <div className="App">
-        <H1>BEST BUDS</H1>
+        {/* <H1>BEST BUDS</H1> */}
+        <IMG src="https://raw.githubusercontent.com/Build-Week-PT-Med-Cabinet-2/DS/main/medcab%20light%20banner.jpg"/>
         <Switch>
           <Route exact path='/'>
             

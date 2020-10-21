@@ -1,5 +1,11 @@
 .App {
   text-align: center;
+  /* background: url("https://raw.githubusercontent.com/Build-Week-PT-Med-Cabinet-2/DS/main/medcab%20dark%20transparent.jpg"); */
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
   
 }
 
