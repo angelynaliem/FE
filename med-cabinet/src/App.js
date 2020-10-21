@@ -49,7 +49,7 @@ const App = () => {
           </Route>
           <Route path="/Login" component={Login} />
           <Route path="/Registration" component={Registration} />
-          <Route path='/protected' component={Dashboard}/>
+          <PrivateRoute path='/protected' component={Dashboard}/>
         </Switch>
       </div>
     </Router>

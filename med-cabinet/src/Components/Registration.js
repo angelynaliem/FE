@@ -2,29 +2,35 @@ import React, { useState, useEffect } from 'react';
 import * as yup from 'yup';
 import axios from 'axios';
 import './Registration.css';
+import { Link, useHistory } from 'react-router-dom';
 
 const formSchema = yup.object().shape({
-  name: yup.string().required('Please enter your Name!'),
-  email: yup.string().email().required('email is a required field'),
+  first_name: yup.string().required('Please enter your Name!'),
+  email: yup.string().email().required('Email is a required field'),
+  username: yup.string().required('Create a Username!'),
   password: yup.string().required('Password is a required field'),
   
 });
 
 export default function Registration() {
+
+  const history = useHistory();
+  
   const [formState, setFormState] = useState({
-    name: '',
+    first_name: '',
     email: '',
+    username:"",
     password: '',
     
   });
 
-  const [post, setPost] = useState('');
   const [serverError, setServerError] = useState('');
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
   const [errors, setErrors] = useState({
-    name: '',
+    first_name: '',
     email: '',
+    username:"",
     password: '',
    
   });
@@ -68,18 +74,21 @@ export default function Registration() {
     });
   }, [formState]);
 
+  
+
   const formSubmit = (event) => {
     event.preventDefault();
     console.log('form submitted');
     axios
-      .post('https://reqres.in/api/users', formState)
+      .post('https://med-cabinet-api-2020.herokuapp.com/api/auth/register', formState)
       .then((response) => {
         console.log(response);
-        setPost(response.data);
-        console.log('Success', post);
+        history.push("/protected")
+        
         setFormState({
-          name: '',
+          first_name: '',
           email: '',
+          username: '',
           password: '',
          
         });
@@ -92,19 +101,19 @@ export default function Registration() {
   return (
     <form onSubmit={formSubmit}>
       <h1>Registration</h1>
-      <label htmlFor='name'>
+      <label htmlFor='first_name'>
         {' '}
-        Name:
+        First Name:
         <input
-          id='name'
+          id='first_name'
           type='text'
-          name='name'
+          name='first_name'
           data-cy='name'
-          placeholder='Your Name'
-          value={formState.name}
+          placeholder='First Name'
+          value={formState.first_name}
           onChange={handleChanges}
         />
-        {errors.name.length > 2 ? <p className='error'>{errors.name}</p> : null}
+        {errors.first_name.length > 2 ? <p className='error'>{errors.first_name}</p> : null}
       </label>
       <br />
       <label htmlFor='email'>
@@ -138,6 +147,22 @@ export default function Registration() {
           <p className='error'>{errors.password}</p>
         ) : null}
       </label>
+      <br />
+      <label htmlFor='username'>
+        Create Username:
+        <input
+          id='username'
+          type='username'
+          name='username'
+          data-cy='username'
+          placeholder='Username'
+          value={formState.username}
+          onChange={handleChanges}
+        />
+        {errors.password.length > 2 ? (
+          <p className='error'>{errors.username}</p>
+        ) : null}
+      </label>
 
       <button
         type='submit'
@@ -147,7 +172,13 @@ export default function Registration() {
       >
         Submit
       </button>
-      <pre>{JSON.stringify(post, null, 2)}</pre>
+      <br />
+      <div>
+      <h2>Already Registered? </h2>
+          <Link style={{color: "white", fontSize:"2rem", textDecoration:"none"}}to="/Login" >
+           <button>Login Here</button> 
+          </Link>
+        </div>
     </form>
   );
 }
