@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Data from '../Data/csvjson.json';
 import styled from 'styled-components';
-import SearchForm from '../Froms/SearchForm';
+import SearchForm from '../Forms/SearchFormm';
 
 const NewDiv = styled.div`
   width: 30%;

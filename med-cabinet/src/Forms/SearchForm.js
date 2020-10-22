@@ -31,16 +31,6 @@ const SearchForm = (props) => {
             placeholder='Search'
           />
         </label>
-        {/* <label htmlFor='search'>
-          Search: By Strain name
-          <input
-            onChange={handleChange}
-            type='text'
-            id='search'
-            name='search'
-            placeholder='Search'
-          />
-        </label> */}
         <button type='submit'>Sort by Type:</button>
       </form>
     </div>

@@ -22,13 +22,14 @@ const NavigationComp = () => {
   return (
     <div>
       <NewDiv>
-        <NewNavLink to='/Login'>Login</NewNavLink>
-        <NewNavLink to='/Registration'>Registration</NewNavLink>
-        <NewNavLink to='/protected'>Strains List</NewNavLink>
+        <NewNavLink to='/login'>Login</NewNavLink>
+        <NewNavLink to='/registration'>Registration</NewNavLink>
+        <NewNavLink to='/strainList'>Strains List</NewNavLink>
       </NewDiv>
-      <Route exact path='/Registration' component={Registration} />
-      <Route exact path='/Login' component={Login} />
-      <PrivateRoute path='/protected' component={StrainList} />
+      <Route exact path='/registration' component={Registration} />
+      <Route exact path='/strainList' component={StrainList} />
+      {/* <PrivateRoute exact path='/strainList' component={StrainList} /> */}
+      <Route exact path='/login' component={Login} />
     </div>
   );
 };
