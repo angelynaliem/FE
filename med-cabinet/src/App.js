@@ -53,11 +53,9 @@ const App = () => {
           </Route>
           <Route path="/Login" component={Login} />
           <Route path="/Registration" component={Registration} />
-
+          <PrivateRoute path="/Strainslist" component={StrainList} />
           <Route path='/UserProfile' component={UserProfile}/>
           <Route path='/EditUserForm' component={EditUserForm} />
-
-          <Route path="/Strainslist" component={StrainList} />
           <PrivateRoute path='/protected' component={Dashboard}/>
 
         </Switch>
