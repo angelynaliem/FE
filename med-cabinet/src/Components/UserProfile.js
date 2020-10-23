@@ -3,11 +3,13 @@ import { connect } from 'react-redux';
 import { editUser } from '../actions/userAction';
 
 const UserProfile = ({ editUser, user, isEditing, error }) => {
-     const [editing, setEditing] = useState(false);
+     const [profile, setProfile] = useState( user )
+    
 
-     const editProfile = profile => {
-         
-     }
+    const handleSubmit = e => {
+        e.preventDefault()
+        
+    }
 
 
     return (

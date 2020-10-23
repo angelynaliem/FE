@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { editUser } from '../actions/userAction';
 
-const EditUserForm = (user) => {
-    const [profile, setProfile] = useState({ user })
+const EditUserForm = (user, editUser) => {
+    const [profile, setProfile] = useState( user )
 
     const handleChange = (e) => {
         setProfile({...profile, [e.target.name]: e.target.value})
