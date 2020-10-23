@@ -48,7 +48,7 @@ const App = () => {
           </Route>
           <Route path="/Login" component={Login} />
           <Route path="/Registration" component={Registration} />
-          <Route path="/Strainslist" component={StrainList} />
+          <PrivateRoute path="/Strainslist" component={StrainList} />
           <PrivateRoute path='/protected' component={Dashboard}/>
         </Switch>
       </div>

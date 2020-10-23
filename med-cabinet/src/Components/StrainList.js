@@ -8,14 +8,14 @@ const StrainList = () => {
 
   const getStrainList = () =>{
     axios
-      .get('https://strains-cannabis.herokuapp.com/strains')
+      .get('http://best-buds.herokuapp.com/predict')
       .then(res => setStrainsList(res.data))
       .catch(err=> console.log(err.res));
       console.log(strainsList);
   }
   return ( 
     <div>
-      <h1>Strains</h1>
+      <h1>Your Recommendations</h1>
     </div>
    );
 }
