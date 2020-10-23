@@ -1,16 +1,11 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { editUser } from '../actions/userAction';
+import EditUserForm from './EditUserForm';
 
 const UserProfile = ({ editUser, user, isEditing, error }) => {
      const [profile, setProfile] = useState( user )
-    
-
-    const handleSubmit = e => {
-        e.preventDefault()
-        
-    }
-
 
     return (
         <>
@@ -22,7 +17,7 @@ const UserProfile = ({ editUser, user, isEditing, error }) => {
             <p>Username: {user.username}</p>
             <p>Email: {user.email}</p>
         </div>
-        <button>Edit</button>
+        <Link to='/EditUserForm' component={EditUserForm}>Edit</Link>
         </>
     );
 }

@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { editUser } from '../actions/userAction';
 
 const EditUserForm = (user, editUser) => {
     const [profile, setProfile] = useState( user )
+    const {push} = useHistory()
 
     const handleChange = (e) => {
         setProfile({...profile, [e.target.name]: e.target.value})
@@ -11,6 +13,7 @@ const EditUserForm = (user, editUser) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         props.editUser(profile)
+        push('/UserProfile')
     }
 
     return (
@@ -40,7 +43,7 @@ const EditUserForm = (user, editUser) => {
                         value={profile.email}
                         onChange={handleChange}
                     />
-                <button>Save</button>
+                <button onClick={handleSubmit}>Save</button>
             </form>
         </div>
     )
