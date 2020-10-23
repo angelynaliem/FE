@@ -2,12 +2,14 @@ import React from "react";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import styled from 'styled-components';
 
+
 const FormDiv = styled.div `
   color: white;
 
 `
 
 class Login extends React.Component {
+
   state = {
     credentials: {
       username: "",
@@ -35,7 +37,7 @@ class Login extends React.Component {
   login = (e) => {
     e.preventDefault();
     axiosWithAuth()
-      .post("/api/Login", this.state.credentials)
+      .post("/api/auth/login", this.state.credentials)
       .then((res) => {
         localStorage.setItem("token", res.data.payload);
         this.props.history.push("/protected");

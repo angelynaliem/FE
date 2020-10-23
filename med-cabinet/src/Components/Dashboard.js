@@ -1,51 +1,31 @@
-// import React from 'react';
-// import { Link, Route } from 'react-router-dom';
-// import styled from 'styled-components';
-
-
-// const NewNavLink = styled(Link)`
-//   color: white;
-//   font-size: 2rem;
-// `;
-
-// const Dashboard = () => {
-//     return ( 
-//         <div>
-//             <h1>Dashboard Template</h1>
-//             <NewNavLink to='/Strainlists' >Strain List</NewNavLink>
-//             </div>
-//      );
-// }
- 
-// export default Dashboard;
-
-
 import React, { useState, useEffect } from 'react';
 import * as yup from 'yup';
 import axios from 'axios';
 import './Registration.css';
+import { useHistory } from 'react-router-dom';
 
 const formSchema = yup.object().shape({
   type: yup
     .string()
-    // .required('Please select strain type')
+    
     .oneOf(['indica', 'sativa', 'hybrid']),
-  creative: yup.string().defined(),
-  energetic: yup.string().defined(),
-  euphoric: yup.string().defined(),
-  focused: yup.string().defined(),
-  happy: yup.string().defined(),
-  hungry: yup.string().defined(),
-  relaxed: yup.string().defined(),
-  depression: yup.string().defined(),
-  inflammation: yup.string().defined(),
-  insomnia: yup.string().defined(),
-  lackofappetite: yup.string().defined(),
-  pain: yup.string().defined(),
-  nausea: yup.string().defined(),
+  creative: yup.string(),
+  energetic: yup.string(),
+  euphoric: yup.string(),
+  focused: yup.string(),
+  happy: yup.string().de,
+  hungry: yup.string(),
+  relaxed: yup.string(),
+  depression: yup.string(),
+  inflammation: yup.string(),
+  insomnia: yup.string(),
+  lackofappetite: yup.string(),
+  pain: yup.string(),
+  nausea: yup.string(),
 });
 
 export default function Registration() {
+  const history = useHistory();
   const [formState, setFormState] = useState({
     type: '',
     depression: '',
@@ -63,15 +43,11 @@ export default function Registration() {
     relaxed: '',
   });
 
-  const [post, setPost] = useState('');
   const [serverError, setServerError] = useState('');
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
   const [errors, setErrors] = useState({
-    name: '',
-    email: '',
-    password: '',
-    type: '',
+   type:'',
     depression: '',
     inflammation: '',
     insomnia: '',
@@ -127,18 +103,16 @@ export default function Registration() {
   }, [formState]);
 
   const formSubmit = (event) => {
+    const stringData = {...formState};
     event.preventDefault();
     console.log('form submitted');
-    axios
-      .post('https://reqres.in/api/users', formState)
+    axios.post('https://best-buds.herokuapp.com/predict', stringData)
       .then((response) => {
-        console.log(response);
-        setPost(response.data);
-        console.log('Success', post);
+        history.push("/StrainsList");
+        console.log(stringData);
+       
         setFormState({
-          name: '',
-          email: '',
-          password: '',
+          
           type: '',
           depression: '',
           inflammation: '',
@@ -154,17 +128,17 @@ export default function Registration() {
           hungry: '',
           relaxed: '',
         });
-        serverError(null);
+        setServerError(null);
+        history.push("/StrainsList");
       })
       .catch((error) => {
         setServerError('404 error');
+        console.log(error)
       });
   };
   return (
     <form onSubmit={formSubmit}>
       <h1>Fill out to get recommended strains</h1>
-      
-
       <label htmlFor='type'>
         Choose Type:
         <select
@@ -175,7 +149,7 @@ export default function Registration() {
           onChange={handleChanges}
         >
           {/* value not used just a place slection of strain */}
-          <option disabled selected value=''>
+          <option value=''>
             Choose strain type
           </option>
           <option name='indica' value='indica'>
@@ -363,7 +337,6 @@ export default function Registration() {
       >
         Submit
       </button>
-      <pre>{JSON.stringify(post, null, 2)}</pre>
     </form>
   );
 }
