@@ -7,7 +7,12 @@ import Dashboard from './Components/Dashboard';
 import Login from './Components/Login';
 import Registration from './Components/Registration';
 import styled from 'styled-components';
+
+import UserProfile from './Components/UserProfile';
+import EditUserForm from './Components/EditUserForm';
+
 import StrainList from './Components/StrainList';
+
 
 
 const NewDiv = styled.div`
@@ -48,8 +53,13 @@ const App = () => {
           </Route>
           <Route path="/Login" component={Login} />
           <Route path="/Registration" component={Registration} />
+
+          <Route path='/UserProfile' component={UserProfile}/>
+          <Route path='/EditUserForm' component={EditUserForm} />
+
           <Route path="/Strainslist" component={StrainList} />
           <PrivateRoute path='/protected' component={Dashboard}/>
+
         </Switch>
       </div>
     </Router>
