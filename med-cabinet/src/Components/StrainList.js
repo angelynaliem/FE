@@ -1,60 +1,26 @@
-import React, { useState } from 'react';
-import Data from '../Data/csvjson.json';
-import styled from 'styled-components';
-import SearchForm from '../Froms/SearchForm';
-
-import {getData} from '../actions/actions';
-import { useEffect } from 'react';
-
-import {connect} from 'react-redux';
+import React,{useState, useEffect} from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 
-const NewDiv = styled.div`
-  width: 30%;
-  border: 1px solid black;
-  margin: 1%;
-`;
+const StrainList = () => {
+  const [strainsList, setStrainsList] = useState([]);
 
-const StrainWrapperDiv = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-`;
-
-const StrainList = (props) => {
-  useEffect(()=>{
-    props.getData();
-  },[]);
-  const [dataStrain, setDataStrain] = useState(Data);
-
-  return (
+  const getStrainList = () =>{
+    axios
+      .get('https://strains-cannabis.herokuapp.com/strains')
+      .then(res => setStrainsList(res.data))
+      .catch(err=> console.log(err.res));
+      console.log(strainsList);
+  }
+  return ( 
     <div>
-      <SearchForm dataStrain={dataStrain} setDataStrain={setDataStrain} />
-      <StrainWrapperDiv>
-        {dataStrain.map((element, i) => (
-          <NewDiv key={i}>
-            <h1>Strain: {element.Strain}</h1>
-            <h2>Type: {element.Type}</h2>
-            <h3>Rating: {element.Rating}</h3>
-            <h4>Effects: {element.Effects}</h4>
-            <h5>Flavors: {element.Flavor}</h5>
-            <h6>Description: {element.Description}</h6>
-            <button>Save Strain</button>
-          </NewDiv>
-        ))}
-      </StrainWrapperDiv>
+      <h1>Strains</h1>
     </div>
-  );
-};
+   );
+}
+ 
+export default StrainList;
 
-const mapStateToProps = (state)=>{
-  return{
-    strains: state.strains,
-    isFetching: state.isFetching,
-    isUploading: state.isUploading,
-    error: state.error,
-  };
-};
 
-export default connect(mapStateToProps,{
-  getData,
-}) (StrainList);
+

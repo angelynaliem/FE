@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import './App.css';
 import PrivateRoute from './utils/PrivateRoute';
-import NavigationComp from './Components/NavigationComp';
 // import Login from './Components/Login';
 import Dashboard from './Components/Dashboard';
 import Login from './Components/Login';
 import Registration from './Components/Registration';
 import styled from 'styled-components';
+import StrainList from './Components/StrainList';
 
 
 const NewDiv = styled.div`
@@ -23,13 +23,6 @@ const NewNavLink = styled(Link)`
   font-weight: 800;
   margin-top: 100px;
 `;
-const H1 = styled.div `
-  color: white;
-  font-size: 4rem;
-  font-weight: 600;
-  margin-top: 60px;
-
-`;
 const IMG = styled.img `
 width: 100%;
 height: 250px;
@@ -42,7 +35,7 @@ const App = () => {
     
     <Router >
       <div className="App">
-        {/* <H1>BEST BUDS</H1> */}
+       
         <IMG src="https://raw.githubusercontent.com/Build-Week-PT-Med-Cabinet-2/DS/main/medcab%20light%20banner.jpg"/>
         <Switch>
           <Route exact path='/'>
@@ -55,6 +48,7 @@ const App = () => {
           </Route>
           <Route path="/Login" component={Login} />
           <Route path="/Registration" component={Registration} />
+          <Route path="/Strainslist" component={StrainList} />
           <PrivateRoute path='/protected' component={Dashboard}/>
         </Switch>
       </div>

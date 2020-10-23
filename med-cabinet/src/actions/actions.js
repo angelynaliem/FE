@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { ThemeConsumer } from 'styled-components';
 
 //get api data
 
