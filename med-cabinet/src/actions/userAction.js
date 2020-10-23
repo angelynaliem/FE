@@ -9,6 +9,7 @@ export const userId = () => {
 export const EDIT_USER = 'EDIT_USER';
 export const EDIT_USER_SUCCESS = 'EDIT_USER_SUCCESS';
 export const EDIT_USER_FAILED = 'EDIT_USER_FAILED';
+export let newUserId
 
 export const editUser = (user) => dispatch => {
     dispatch({ type: EDIT_USER })
