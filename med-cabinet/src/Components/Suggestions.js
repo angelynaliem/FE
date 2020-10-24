@@ -60,7 +60,9 @@ const Suggestions =({addToSavedList})=> {
 
     setNewStrain({
       ...strainState,
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.type === "checkbox"
+        ? event.target.name
+        : event.target.value
     });
     console.log(strainState);
   };
