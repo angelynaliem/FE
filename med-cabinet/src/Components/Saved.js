@@ -26,11 +26,11 @@ const Saved = () => {
         <h3 className="ml-auto text-align-center">savedList</h3>
         {savedList.map((weed)  => (
            <div key={weed.id}>
-           <h2>{weed.strain}</h2>
+           <h2>{weed.Strain}</h2>
            <Link key = {weed.id} to = {`/update-list/${weed.id}`} >
             <button onClick = {() => (handleClick(weed))}>Update Strain Name</button>
             </Link>
-           <p>{weed.description}</p>
+           <p>{weed.Description}</p>
            <button onClick = {() => (deleteItem(weed))}>Delete</button>
        </div> 
         ))}

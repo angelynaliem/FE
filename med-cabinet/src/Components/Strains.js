@@ -22,8 +22,8 @@ const Strains = (props) => {
               {props.weed.map(weed => (
               <Col>
                   <div style={{color:"white"}} key={Date.now()+weed.length}>
-                      <h2>{weed.strain}</h2>
-                      {/* <p>{weed.description}</p> */}
+                      <h2>{weed.Strain}</h2>
+                      <p>{weed.Description}</p>
                       <button onClick = {() => handleSubmit(weed)}>Save Strain</button>
                   </div>
               </Col>
