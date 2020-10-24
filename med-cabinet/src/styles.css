@@ -6,6 +6,7 @@ form {
     width: 90%;
     max-width: 300px;
     margin: 0 auto;
+    color:white;
   }
   
   label {
@@ -64,8 +65,9 @@ form {
     cursor: not-allowed;
   }
 
-  h1{
+  p,h1,h2,h3,h4{
       text-align: center;
+      color: white;
   }
   
   

@@ -36,7 +36,6 @@ const IMG = styled.img `
 width: 100%;
 height: 250px;
 opacity: .8;
-
 `
 
 function App(props) {
@@ -66,15 +65,18 @@ function App(props) {
 
     console.log(userId)
     axiosWithAuth()
-    .post('/api/strains', weed)
+    .post('api/strains', weed)
+    
     .then(res => {
-      console.log(res.data)
+      console.log("weed", weed)
+      console.log("saved list",res.data)
       setSavedList([...savedList,res.data]);
       axiosWithAuth()
-      .get('/api/strains')
+      .get('api/strains')
     .then(res => {
       console.log(res.data)
     console.log(savedList)
+    
   })
   })
   .catch(err => {

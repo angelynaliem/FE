@@ -3,12 +3,9 @@ import { Link } from "react-router-dom";
 
 //reactstrap styles
 import {Container,
-    Col,
-    Row, 
     Collapse,
     Navbar,
    NavbarToggler,
-    NavbarBrand,
     Nav,
     NavItem
   } from 'reactstrap';

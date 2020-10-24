@@ -78,8 +78,6 @@ const toggle = () => setIsOpen(!isOpen);
         </Container>
         <Container className="App p-5">
           <h2>Sign Up</h2>
-          <h3>Registering for the first time?</h3>
-          <h4>Please , Sign up!</h4>
           <Form className="form" onSubmit={handleSubmit} >
             <Col>
               <FormGroup>

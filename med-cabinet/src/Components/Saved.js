@@ -25,9 +25,9 @@ const Saved = () => {
         <div>
         <h3 className="ml-auto text-align-center">savedList</h3>
         {savedList.map((weed)  => (
-           <div key={weed.strain_id}>
+           <div key={weed.id}>
            <h2>{weed.strain}</h2>
-           <Link key = {weed.strain_id} to = {`/update-list/${weed.strain_id}`} >
+           <Link key = {weed.id} to = {`/update-list/${weed.id}`} >
             <button onClick = {() => (handleClick(weed))}>Update Strain Name</button>
             </Link>
            <p>{weed.description}</p>

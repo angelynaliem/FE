@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 
 import { axiosWithAuth } from '../utils/axiosWithAuth'
-// import {UserContext} from '../context/UserContext';
+import {UserContext} from '../context/UserContext';
 //sign up
 
 export const POST_USER = "POST_USER"
@@ -32,7 +32,7 @@ export const createUser = (creds) => dispatch => {
     dispatch({ type: POST_USER });
 
     axiosWithAuth()
-    .post('/auth/register', creds)
+    .post('/api/auth/register', creds)
     .then(res => {
         console.log(res.data)
         window.localStorage.setItem('token', res.data.token)
@@ -50,7 +50,7 @@ export const logIn = (creds,cb) => dispatch => {
     dispatch({ type: LOGGING_IN })
     
     axiosWithAuth()
-    .post("/auth/login", creds)
+    .post('/api/auth/login', creds)
     .then(res => {
         console.log("success")
         console.log(res)
