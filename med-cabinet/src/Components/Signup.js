@@ -1,28 +1,25 @@
-import React, { useState,useContext, useEffect } from 'react'
+import React, { useState,useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { logIn } from '../actions/actions'
+import { createUser } from '../actions/actions'
 import { Link } from "react-router-dom";
-import { UserContext } from '../context/UserContext';
-import { Redirect } from "react-router-dom";
+import * as yup from "yup";
 
 import {Container,
-    Col,
-    Row, 
-    Collapse,
-    Navbar,
-   NavbarToggler,
-    NavbarBrand,
-    Nav,
-    NavItem,
-     Form,
-    FormGroup, Label, Input,
-    Button,
-  } from 'reactstrap';
+  Col,
+  Row, 
+  Collapse,
+  Navbar,
+ NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem,
+   Form,
+  FormGroup, Label, Input,
+  Button,
+} from 'reactstrap';
   
-const Login = (props) => {
-  const {setUserId, userId}=useContext(UserContext);
-  const [isClicked, setClicked] = useState(true);
+const Signup = (props) => {
             //navBar states
 const [isOpen, setIsOpen] = useState(false);
 const toggle = () => setIsOpen(!isOpen);
@@ -38,35 +35,49 @@ const toggle = () => setIsOpen(!isOpen);
             ...formState,
             [e.target.name]: e.target.value
         })
+        
     }
-    const makePush = () => {
-      return history.push('/nav')
-    }
+
     const handleSubmit = e => {
         e.preventDefault();
-        props.logIn(formState,setUserId)
-        console.log(userId)
-          setFormState({
-            username:"",
-            password:""
+
+        if(formState.username && formState.password){            
+            props.createUser(formState)
+            return history.push('/login')
+        }
+
+        return setFormState({
+            username: "",
+            password: ""
         })
-        setClicked(!isClicked)
-        setClicked(!isClicked)
-        makePush();
     }
-useEffect(() => {
-  console.log("ahhh")
-  if(isClicked===false){
-    history.push('/nav')
-  }
-  else{
-    console.log(null);
-  }
-}, [isClicked] );
+
+    
+    
+
+   
+
+    
     return (
       <>
-      
-          <h2>Sign In</h2>
+      <Container className = "p-0" fluid={true} >
+          <Navbar className = "border-bottom p-4" color="light" light expand="md">
+        <NavbarBrand href="/">Med-Cabinet</NavbarBrand>
+        <NavbarToggler onClick={toggle} />
+        <Collapse isOpen={isOpen} navbar>
+          <Nav className="ml-auto" navbar>
+            <NavItem>
+            <Link className = "nav-link font-weight-bolder" to = "/login">Login</Link>
+            </NavItem>
+            <NavItem>
+            <Link className = "nav-link font-weight-bolder" to = "/signup">Sign-up</Link>
+            </NavItem>
+            </Nav>
+          </Collapse>
+        </Navbar>
+        </Container>
+        <Container className="App p-5">
+          <h2>Sign Up</h2>
           <Form className="form" onSubmit={handleSubmit} >
             <Col>
               <FormGroup>
@@ -92,19 +103,17 @@ useEffect(() => {
                 />
               </FormGroup>
             </Col>
-            <Button>Submit</Button>
+            <Button> Submit </Button>
           </Form>
-        
+        </Container>
         </>
       );
 }
 
 const mapStateToProps = state => {
     return {
-        ...state,
-        loggingIn: state.loggingIn,
-        userInfo:state.userInfo
+        ...state
     }
 }
 
-export default connect(mapStateToProps, { logIn })(Login)
+export default connect(mapStateToProps, { createUser })(Signup)

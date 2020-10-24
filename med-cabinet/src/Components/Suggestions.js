@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import * as yup from 'yup';
-import axios from 'axios';
-import './Registration.css';
-import { useHistory } from 'react-router-dom';
+import axios from "axios";
+import React, { useState, useEffect } from "react";
+import * as yup from "yup";
+import NavHeader from './NavHeader'
+import Strains from './Strains'
 
 
 
-const Dashboard =()=> {
+const Suggestions =({addToSavedList})=> {
   
-  const [formState, setFormState] = useState({
+  const [strainState, setNewStrain] = useState({
     Type:'',
     Depression: '',
     Inflammation: '',
@@ -25,8 +25,9 @@ const Dashboard =()=> {
     Relaxed: '',
   });
 
+  const [data,setData] = useState([]);
 
-  const [serverError, setServerError] = useState('');
+  const [buttonOn, setButtonOn] = useState(true);
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
   const [errors, setErrors] = useState({
@@ -46,22 +47,71 @@ const Dashboard =()=> {
     Relaxed: '',
   });
 
-  const handleChanges = (event) => {
+  const inputChange = (event) => {
     event.persist();
 
-    const newFormData = {
-      ...formState,
-      [event.target.name]: 
-      event.target.type === "checkbox"
-      ? event.target.name
-      : event.target.value
-    };
+    // const newFormData = {
+    //   ...formState,
+    //   [event.target.name]: 
+    //   event.target.type === "checkbox"
+    //   ? event.target.name
+    //   : event.target.value
+    // };
 
-    validateChange(event);
-    setFormState(newFormData);
+    setNewStrain({
+      ...strainState,
+      [event.target.name]: event.target.value
+    });
+    console.log(strainState);
   };
 
-  const validateChange = (event) => {
+  const [post, setPost] = useState();
+
+  const stringData = {...strainState};
+  // const history = useHistory();
+
+  const onSubmitForm = (event) => {
+    
+    event.preventDefault();
+    console.log('form submitted');
+    axios.post('https://best-buds.herokuapp.com/predict', stringData)
+      .then((response) => {
+        
+        console.log(response.data);
+        
+        setPost(response.data); 
+        setData(response.data);
+       
+        setNewStrain({
+          
+          Type:'',
+          Depression: '',
+          Inflammation: '',
+          Insomnia: '',
+          Appetite: '',
+          Pain: '',
+          Nausea: '',
+          Creative: '',
+          Energetic: '',
+          Euphoric: '',
+          Focused: '',
+          Happy: '',
+          Hungry: '',
+          Relaxed: '',
+        });
+        
+      })
+      .catch((error) => {
+        setErrors(error.data);
+        console.log("error", error)
+      });
+  };
+
+    // validateChange(event);
+    // setFormState(newFormData);
+
+
+  const schema = (event) => {
     yup
       .reach(formSchema, event.target.name)
       .validate(event.target.type === 'checkbox'? event.target.name : event.target.value)
@@ -98,51 +148,18 @@ const Dashboard =()=> {
   });
 
   useEffect(() => {
-    formSchema.isValid(formState).then((valid) => {
-      console.log('valid?', valid);
-      setIsButtonDisabled(!valid);
+    formSchema.isValid(strainState).then((succesful) => {
+      console.log('valid?', succesful);
+      setButtonOn(!succesful);
     });
-  }, [formState]);
+  }, [strainState]);
 
-  const stringData = {...formState};
-  const history = useHistory();
-  const formSubmit = (event) => {
-    
-    event.preventDefault();
-    console.log('form submitted');
-    axios.post('https://best-buds.herokuapp.com/predict', stringData)
-      .then((response) => {
-        history.push("/StrainsList");
-        console.log(response.data);
-        
-       
-        setFormState({
-          
-          Type:'',
-          Depression: '',
-          Inflammation: '',
-          Insomnia: '',
-          Appetite: '',
-          Pain: '',
-          Nausea: '',
-          Creative: '',
-          Energetic: '',
-          Euphoric: '',
-          Focused: '',
-          Happy: '',
-          Hungry: '',
-          Relaxed: '',
-        });
-        setServerError(null);
-        
-      })
-      .catch((error) => {
-        setServerError('404 error');
-        console.log(error.response.request_response)
-      });
-  };
+  
+  
   return (
-    <form onSubmit={formSubmit}>
+    <div>
+      <NavHeader/>
+    <form onSubmit={onSubmitForm} style={{color:"white"}}>
       <h1>Fill out to get recommended strains</h1>
       <label htmlFor='type'>
         Choose Type:
@@ -150,8 +167,8 @@ const Dashboard =()=> {
           name='Type'
           id='Type'
           data-cy='type'
-          value={formState.Type}
-          onChange={handleChanges}
+          value={strainState.Type}
+          onChange={inputChange}
         >
           {/* value not used just a place slection of strain */}
           <option value=''>
@@ -178,8 +195,8 @@ const Dashboard =()=> {
             name='Depression'
             data-cy='Depression'
             id='depressionSelect'
-            value={formState.Depression}
-            onChange={handleChanges}
+            value={strainState.Depression}
+            onChange={inputChange}
             
           />
           Depression
@@ -191,8 +208,8 @@ const Dashboard =()=> {
             name='Inflammation'
             data-cy='Inflammation'
             id='inflammationSelect'
-            checked={formState.Inflammation}
-            onChange={handleChanges}
+            checked={strainState.Inflammation}
+            onChange={inputChange}
           />
           Inflammation
         </label>
@@ -203,8 +220,8 @@ const Dashboard =()=> {
             name='Insomnia'
             data-cy='Insomnia'
             id='insomniaSelect'
-            checked={formState.Insomnia}
-            onChange={handleChanges}
+            checked={strainState.Insomnia}
+            onChange={inputChange}
           />
           Insomnia
         </label>
@@ -215,8 +232,8 @@ const Dashboard =()=> {
             name='Appetite'
             data-cy='Appetite'
             id='lackofappetiteSelect'
-            checked={formState.Appetite}
-            onChange={handleChanges}
+            checked={strainState.Appetite}
+            onChange={inputChange}
           />
           Lack of appetite
         </label>
@@ -227,8 +244,8 @@ const Dashboard =()=> {
             name='Pain'
             data-cy='Pain'
             id='painSelect'
-            checked={formState.Pain}
-            onChange={handleChanges}
+            checked={strainState.Pain}
+            onChange={inputChange}
           />
           Pain
         </label>
@@ -239,8 +256,8 @@ const Dashboard =()=> {
             name='Nausea'
             data-cy='Nausea'
             id='nauseaSelect'
-            checked={formState.Nausea}
-            onChange={handleChanges}
+            checked={strainState.Nausea}
+            onChange={inputChange}
           />
           Nausea
         </label>
@@ -256,8 +273,8 @@ const Dashboard =()=> {
             data-cy='Creative'
             id='creativeSelect'
             // using the checked property insted of value for check boxes so they return the expected bollean
-            checked={formState.Creative}
-            onChange={handleChanges}
+            checked={strainState.Creative}
+            onChange={inputChange}
           />
           Creative
         </label>
@@ -268,8 +285,8 @@ const Dashboard =()=> {
             name='Energetic'
             data-cy='Energetic'
             id='energeticSelect'
-            checked={formState.Energetic}
-            onChange={handleChanges}
+            checked={strainState.Energetic}
+            onChange={inputChange}
           />
           Energetic
         </label>
@@ -280,8 +297,8 @@ const Dashboard =()=> {
             name='Euphoric'
             data-cy='Euphoric'
             id='euphoricSelect'
-            checked={formState.Euphoric}
-            onChange={handleChanges}
+            checked={strainState.Euphoric}
+            onChange={inputChange}
           />
           Euphoric
         </label>
@@ -292,8 +309,8 @@ const Dashboard =()=> {
             name='Focused'
             data-cy='Focused'
             id='focusedSelect'
-            checked={formState.Focused}
-            onChange={handleChanges}
+            checked={strainState.Focused}
+            onChange={inputChange}
           />
           Focused
         </label>
@@ -304,8 +321,8 @@ const Dashboard =()=> {
             name='Happy'
             data-cy='Happy'
             id='happySelect'
-            checked={formState.Happy}
-            onChange={handleChanges}
+            checked={strainState.Happy}
+            onChange={inputChange}
           />
           Happy
         </label>
@@ -316,8 +333,8 @@ const Dashboard =()=> {
             name='Hungry'
             data-cy='Hungry'
             id='hungrySelect'
-            checked={formState.Hungry}
-            onChange={handleChanges}
+            checked={strainState.Hungry}
+            onChange={inputChange}
           />
           Hungry
         </label>
@@ -328,8 +345,8 @@ const Dashboard =()=> {
             name='Relaxed'
             data-cy='Relaxed'
             id='relaxedSelect'
-            checked={formState.Relaxed}
-            onChange={handleChanges}
+            checked={strainState.Relaxed}
+            onChange={inputChange}
           />
           Relaxed
         </label>
@@ -339,13 +356,16 @@ const Dashboard =()=> {
         type='submit'
         name='submit'
         data-cy='submit'
-        disabled={isButtonDisabled}
+        disabled={buttonOn}
+        style={{color:"black"}}
       >
         Submit
       </button>
-  <pre style={{color:"white"}}>{JSON.stringify(stringData, null, 2)}</pre>
     </form>
+    
+    <Strains weed = {data} />
+    </div>
   );
 }
 
-export default Dashboard
+export default Suggestions

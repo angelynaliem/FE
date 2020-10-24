@@ -3,24 +3,21 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import reducer from './reducers'
+//redux
+import { Provider } from 'react-redux'
+import { createStore, applyMiddleware } from 'redux'
+//middleware
+import thunk from 'redux-thunk'
 
-import { createStore, applyMiddleware, combineReducers } from "redux";
-import { Provider } from "react-redux";
-import thunk from "redux-thunk";
-import reducer from "./reducers/reducer";
-import userReducer from './reducers/userReducer';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-const rootReducer = combineReducers({
-  reducer,
-  userReducer
-})
-
-const store = createStore(rootReducer, applyMiddleware(thunk));
+const store = createStore(reducer, applyMiddleware(thunk))
 
 ReactDOM.render(
-  <Provider store={store}>
+  <Provider store={store} >
     <App />
-    </Provider>,
+  </Provider>,
   document.getElementById('root')
 );
 
