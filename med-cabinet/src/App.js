@@ -8,19 +8,19 @@ import {axiosWithAuth} from './utils/axiosWithAuth';
 import axios from 'axios'
 import { connect } from 'react-redux'
 //component imports
-import HomePage from "./components/HomePage"
-import Saved from "./components/Saved"
-import Suggestions from "./components/Suggestions"
-import Login from "./components/Login"
-import Signup from "./components/Signup"
-import Strains from './components/Strains'
+import HomePage from './components/HomePage';
+import Saved from './components/Saved';
+import Suggestions from './components/Suggestions'
+import Login from './components/Login';
+import Signup from './components/Signup';
+import Strains from './components/Strains';
 import { WeedContext } from './context/WeedContext';
 import { ProductContext } from './context/ProductContext';
 import { UserContext } from './context/UserContext';
 import Home from './components/Home';
 import PrivateRoute from './utils/PrivateRoute';
-import { logIn } from './actions/actions'
-import UpdateList from './components/UpdateList'
+import { logIn } from './actions/actions';
+import UpdateList from './components/UpdateList';
 //reactstrap styles
 import {Container, 
   Collapse,

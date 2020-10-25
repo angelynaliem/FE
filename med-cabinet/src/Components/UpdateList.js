@@ -24,13 +24,12 @@ const UpdateList = (item) => {
     const {dummy} = useContext(WeedContext);
     //setting up empty state for axios put request to edit movie
     const [form,setForm] = useState({
-        id:0,
-        strain:""
+        Strain:""
     });
-    const emptyState = {
-        id:Date.now(),
-        strain:""
-    }
+    // const emptyState = {
+    //     id:Date.now(),
+    //     strain:""
+    // }
     
     //navBar states
 const [isOpen, setIsOpen] = useState(false);
@@ -80,9 +79,9 @@ const toggle = () => setIsOpen(!isOpen);
                 Strain Name:
             <input
             type = "text" 
-            name = "strain"
-            placeholder = {dummy.strain}
-            value = {form.strain}
+            name = "Strain"
+            // placeholder = {dummy.strain}
+            value = {form.Strain}
             onChange = {handleChanges}
              />
             </label>
