@@ -1,7 +1,7 @@
-import React, { useState, useContext } from "react";
+
 
 import { axiosWithAuth } from '../utils/axiosWithAuth'
-import {UserContext} from '../context/UserContext';
+// import {UserContext} from '../context/UserContext';
 //sign up
 
 export const POST_USER = "POST_USER"
@@ -35,7 +35,7 @@ export const createUser = (creds) => dispatch => {
     .post('/api/auth/register', creds)
     .then(res => {
         console.log(res.data)
-        window.localStorage.setItem('token', res.data.token)
+        // window.localStorage.setItem('token', res.data.token)
         dispatch({ type: USER_SUCCESS, payload: res.data })
     })
     .catch(err => {
@@ -56,7 +56,7 @@ export const logIn = (creds,cb) => dispatch => {
         console.log(res)
         window.localStorage.setItem('token', res.data.token)
         cb(res.data.userInfo)
-        cb(res.data.userInfo)
+        // cb(res.data.userInfo)
         dispatch({ type: LOGIN_SUCCESS, payload: res.data })
         
     })
@@ -77,7 +77,7 @@ export const logOut = () => {
 
 //function to save reccomendations
 
-export const saveRecommend = (weed,userId) => dispatch => {
+export const saveRecommend = (weed) => dispatch => {
     dispatch ({ type: SAVE_INITIALIZE })
 
     axiosWithAuth()
@@ -89,7 +89,7 @@ export const saveRecommend = (weed,userId) => dispatch => {
         dispatch({ type: SAVE_RECOMMEND_SUCCESS, payload: res.data.message })
     })
     .catch(err => {
-        console.log(err.message)
+        console.log("actions save error",err.message)
         dispatch({ type: SAVE_RECOMMEND_FAILURE, payload: err.message })
     })
 }

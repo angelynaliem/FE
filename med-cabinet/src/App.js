@@ -17,7 +17,7 @@ import Strains from './components/Strains'
 import { WeedContext } from './context/WeedContext';
 import { ProductContext } from './context/ProductContext';
 import { UserContext } from './context/UserContext';
-import Home from './components/Home';
+import Home from './components/Home'
 import PrivateRoute from './utils/PrivateRoute';
 import { logIn } from './actions/actions'
 import UpdateList from './components/UpdateList'
