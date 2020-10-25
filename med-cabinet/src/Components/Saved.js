@@ -7,7 +7,7 @@ const Saved = () => {
     const{savedList, setDummy}=useContext(WeedContext);
     const {deleteItem} = useContext(ProductContext);
     const [form,setForm] = useState({
-        Strain:""
+        strain:""
     })
     const handleClick = (item) => {
         setDummy(item);
